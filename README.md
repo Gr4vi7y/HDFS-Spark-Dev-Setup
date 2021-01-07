@@ -5,18 +5,21 @@ This repository provides the installation instructions for
 * Hadoop 2.10.1,
 * Spark 3.0.1 
 
+and it has been checked on Ubuntu 20.04.1 LTS.
+
+Our developers use Ubuntu LTS and organize their work inside dedicated directory. If you do not know where to install your HDFS/Spark setup, then put it into ~/Workspace/hadoop-spark directory. After the installation the directory will be contains the following:
+
 ```
-????????? data
-????????? Makefile
-????????? src
-????????? tools
-    ????????? hadoop-2.10.1
-    ????????? spark-3.0.1-bin-without-hadoop
+├── Makefile
+├── data
+└── tools
+    ├── hadoop-2.10.1
+    └── spark-3.0.1-bin-without-hadoop
 ```
-* Makefile. Used for running various tasks such as starting up the hadoop/spark, running interactive shells for spark/hadoop etc.
-* src/ directory. Contains git repositories with various spark applications.
-* tools/ directory. Contains hadoop/spark binaries.
+
+* Makefile. Used for running various tasks such as starting up the openjdk/hadoop/spark, running interactive shells for spark/hadoop etc.
 * data/ directory contains HDFS data and spark-rdd data.
+* tools/ directory. Contains hadoop/spark binaries.
 
 ## Usage
 
@@ -24,28 +27,36 @@ Clone this repository into the folder where you want to create your HDFS/Spark s
 
 ```
 mkdir -p ~/Workspace/hadoop-spark && cd ~/Workspace/hadoop-spark
-git clone https://github.com/earthquakesan/hdfs-spark-hive-dev-setup ./
+git clone https://github.com/Gr4vi7y/HDFS-Spark-Dev-Setup
 ```
 
 ### Install Make
-
+If it is a clean version of Ubuntu:
 ```
 sudo apt-get install build-essential
 ```
 
 ### Install OpenJDK 14
-
+Only necessary in case you have not installed Java JDK:
 ```
 make install_java
 ```
 
 ### Configure OpenJDK 14
-
+To set OpenJDK environment variables
 ```
 export JAVA_HOME=/usr/lib/jvm/java-14-openjdk-amd64
 export PATH=/usr/lib/jvm/java-14-openjdk-amd64/bin
+```
+
+To verify that environment variables have been added
+```
 echo $JAVA_HOME
 echo $PATH
+```
+
+Run this command to avoid problems with the make command
+```
 export PATH="/usr/bin:$PATH"
 ```
 
@@ -57,9 +68,9 @@ make download
 
 After this step you should have tools/ folder with the following structure:
 ```
-????????? tools
-    ????????? hadoop-3.3.0
-    ????????? spark-3.0.1-bin
+└── tools
+    ├── hadoop-3.3.0
+    └── spark-3.0.1-bin
 ```
 
 ### Configure HDFS/Spark
